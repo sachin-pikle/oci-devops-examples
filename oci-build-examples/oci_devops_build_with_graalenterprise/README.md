@@ -77,7 +77,7 @@ Allow dynamic-group  <YOUR_DynamicGroup_NAME> to use ons-topics in compartment <
 ![](images/oci_buildpipeline_managedbuild.png)
 
 - Click `Next` and provide the details.
-- In the `Build spec file path`, enter `build_spec.yaml` to use the [GraalVM Enterprise 22.x Java 17 build spec](build_spec.yaml). Alternatively, you can enter `build_spec_oracle_graalvm_jdk17.yaml` to use the [Oracle GraalVM for JDK 17 build spec](./build_spec_oracle_graalvm_jdk17.yaml) or `build_spec_oracle_graalvm_jdk20.yaml` to use the [Oracle GraalVM for JDK 20 build spec](./build_spec_oracle_graalvm_jdk20.yaml).
+- In the `Build spec file path`, enter `build_spec_oracle_graalvm_jdk21.yaml` to use [Oracle GraalVM for JDK 21](./build_spec_oracle_graalvm_jdk21.yaml) or `build_spec_oracle_graalvm_jdk17.yaml` to use [Oracle GraalVM for JDK 17](./build_spec_oracle_graalvm_jdk17.yaml). Alternatively, you can enter `build_spec.yaml` to use the legacy [GraalVM Enterprise 22.x Java 17](build_spec.yaml). 
 
 ![](images/oci_buildstage_1.png)
 
@@ -99,9 +99,9 @@ To install and use Oracle GraalVM in the DevOps build pipeline, the build specif
     ```shell
     steps:
       - type: Command
-        name: "Install Oracle GraalVM Enterprise 22.x Native Image for Java17"
+        name: "Install Oracle GraalVM for JDK 21 (Native Image and JDK)"
         command: |
-          yum -y install graalvm22-ee-17-native-image
+          yum -y install graalvm-21-native-image
     ```
 
 2. Set the JAVA_HOME environment variable.
@@ -109,7 +109,7 @@ To install and use Oracle GraalVM in the DevOps build pipeline, the build specif
     ```shell
     env:
       variables:
-        "JAVA_HOME" : "/usr/lib64/graalvm/graalvm22-ee-java17"
+        "JAVA_HOME" : "/usr/lib64/graalvm/graalvm-java21"
     ```
 
 3. Set the PATH environment variable.
@@ -139,15 +139,13 @@ To install and use Oracle GraalVM in the DevOps build pipeline, the build specif
 
 5. The executable file can be found under `target/my-app`.
 
-```markdown
-  - name: app_native_executable
-    type: BINARY
-    location: target/my-app
-```
+    ```markdown
+      - name: app_native_executable
+        type: BINARY
+        location: target/my-app
+    ```
 
-Here's the complete [build specification for GraalVM Enterprise 22.x Java 17](build_spec.yaml) file. Alternatively, you can use the 
-[build specification for Oracle GraalVM for JDK 17](./build_spec_oracle_graalvm_jdk17.yaml) or
-[build specification for Oracle GraalVM for JDK 20](./build_spec_oracle_graalvm_jdk20.yaml).
+Here's the complete [build specification for Oracle GraalVM for JDK 21](./build_spec_oracle_graalvm_jdk21.yaml). Alternatively, you can use the [build specification for Oracle GraalVM for JDK 17](./build_spec_oracle_graalvm_jdk17.yaml) or the legacy [build specification for GraalVM Enterprise 22.x Java 17](build_spec.yaml) file. 
 
 
 ## How to export the executable file outside of the build pipeline stage.
@@ -171,7 +169,7 @@ The following instructions will help you to export the `executable app file` to 
 
 - Use option `Set Custom Location` as Artifact location.
 - Provide a path and version as `${BUILDRUN_HASH}`, this is to maintain immutable artifacts.
-- The variable `BUILDRUN_HASH` is derived during managed build stage and exported as an exportedVariables.You may use any other name ,but ensure to update the file [build_spec.yaml](build_spec.yaml).
+- The variable `BUILDRUN_HASH` is derived during managed build stage and exported as an exportedVariables.You may use any other name, but ensure to update the corresponding build specification file.
 - Select `Yes, substitute placeholders` as an option and click `Add`.
 
 ![](images/oci_devops_artifact_3.png)
@@ -186,7 +184,7 @@ The following instructions will help you to export the `executable app file` to 
 
 
 - Use `app_native_executable` result artifact name.
-- The name `app_native_executable` is a reference to the outputArtifact defined under the the file [build_spec.yaml](build_spec.yaml).
+- The name `app_native_executable` is a reference to the outputArtifact defined under the corresponding build specification file.
 - Click `Add` and add the stage.
 
 ![](images/oci_upload_artifact.png)
@@ -217,7 +215,7 @@ The following instructions will help you to export the `executable app file` to 
 ## Optional - Run build with more verbose output.
 
 - An additional build instruction file as [build_spec_verbose.yaml](build_spec_verbose.yaml)
-  can be used for more verbose output with the managed build.
+  can be used for more verbose output with the managed build. 
 - To do so, switch to `OCI DevOps project` > `OCI Build pipeline ` > Click `3 dots` on the `Managed Build` stage and click on `View details` and then `Edit Stage`.
 
 ![](images/oci_buildstage_details.png)
@@ -298,7 +296,7 @@ Contributors
 
 - Author: [Rahul M R](https://github.com/RahulMR42).
 - Collaborators: [Sachin Pikle](https://github.com/sachin-pikle)
-- Last release: July 2022
+- Last updated: July 2025
 
 ### Back to examples.
 ----
