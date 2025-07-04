@@ -233,15 +233,21 @@ The following instructions will help you to export the `executable app file` to 
     ```shell
     ...
     EXEC: Installed:   
-    EXEC:   graalvm22-ee-17-native-image.x86_64 0:22.1.0.1-1.el7                             
+    EXEC:   graalvm-21-native-image.x86_64 0:21.0.7-1.el7                                    
     EXEC:    
     EXEC: Dependency Installed:   
-    EXEC:   glibc-static.x86_64 0:2.17-326.0.1.el7_9                                         
-    EXEC:   graalvm22-ee-17-jdk.x86_64 0:22.1.0.1-1.el7                                      
+    EXEC:   glibc-static.x86_64 0:2.17-326.0.9.el7_9.3                                       
+    EXEC:   graalvm-21-jdk.x86_64 0:21.0.7-1.el7                                             
     EXEC:   libstdc++-static.x86_64 0:4.8.5-44.0.3.el7                                       
-    EXEC:   zlib-static.x86_64 0:1.2.7-20.el7_9                                              
+    EXEC:   zlib-static.x86_64 0:1.2.7-21.el7_9                                              
     EXEC:    
-    EXEC: Complete!
+    EXEC: Dependency Updated:   
+    EXEC:   glibc.x86_64 0:2.17-326.0.9.el7_9.3                                              
+    EXEC:   glibc-common.x86_64 0:2.17-326.0.9.el7_9.3                                       
+    EXEC:   glibc-devel.x86_64 0:2.17-326.0.9.el7_9.3                                        
+    EXEC:   glibc-headers.x86_64 0:2.17-326.0.9.el7_9.3                                      
+    EXEC:    
+    EXEC: Complete!   
     ...
     ```
 
@@ -249,38 +255,72 @@ The following instructions will help you to export the `executable app file` to 
 
     ```shell
     ...
-    EXEC: ==================================================================
+    EXEC: ========================================================================================================================   
     EXEC: GraalVM Native Image: Generating 'my-app' (executable)...   
-    EXEC: ==================================================================
-    EXEC: [1/7] Initializing...                     (5.6s @ 0.11GB)   
-    EXEC:  Version info: 'GraalVM 22.1.0.1 Java 17 EE'   
+    EXEC: ========================================================================================================================   
+    EXEC: For detailed information and explanations on the build output, visit:   
+    EXEC: https://github.com/oracle/graal/blob/master/docs/reference-manual/native-image/BuildOutput.md   
+    EXEC: ------------------------------------------------------------------------------------------------------------------------   
+    EXEC: [1/8] Initializing...                                                                                    (3.6s @ 0.09GB)   
+    EXEC:  Java version: 21.0.7+8-LTS, vendor version: Oracle GraalVM 21.0.7+8.1   
+    EXEC:  Graal compiler: optimization level: 2, target machine: x86-64-v3, PGO: ML-inferred   
     EXEC:  C compiler: gcc (redhat, x86_64, 4.8.5)   
-    EXEC:  Garbage collector: Serial GC   
-    EXEC: [2/7] Performing analysis...  [******]    (9.5s @ 0.32GB)   
-    EXEC:    1,880 (62.46%) of  3,010 classes reachable   
-    EXEC:    1,684 (46.71%) of  3,605 fields reachable   
-    EXEC:    7,784 (36.98%) of 21,049 methods reachable   
-    EXEC:       21 classes,     0 fields, and   285 methods registered for reflection   
-    EXEC:       48 classes,    32 fields, and    47 methods registered for JNI access   
-    EXEC: [3/7] Building universe...                (1.1s @ 0.45GB)   
-    EXEC: [4/7] Parsing methods...      [*]         (0.8s @ 0.58GB)   
-    EXEC: [5/7] Inlining methods...     [****]      (1.2s @ 0.97GB)   
-    EXEC: [6/7] Compiling methods...    [*****]     (21.2s @ 0.75GB)   
-    EXEC: [7/7] Creating image...                   (0.9s @ 0.92GB)   
-    EXEC:    2.62MB (46.31%) for code area:    3,708 compilation units   
-    EXEC:    2.45MB (43.34%) for image heap:     945 classes and 38,518 objects   
-    EXEC:  600.06KB (10.35%) for other data   
-    EXEC:    5.66MB in total   
-    EXEC: ------------------------------------------------------------------
-    ...
-    EXEC: ------------------------------------------------------------------
-    EXEC: 0.9s (2.1% of total time) in 18 GCs | Peak RSS: 2.44GB | CPU load: 3.41   
-    EXEC: ------------------------------------------------------------------
+    EXEC:  Garbage collector: Serial GC (max heap size: 80% of RAM)   
+    EXEC:  1 user-specific feature(s):   
+    EXEC:  - com.oracle.svm.thirdparty.gson.GsonFeature   
+    EXEC: ------------------------------------------------------------------------------------------------------------------------   
+    EXEC: Build resources:   
+    EXEC:  - 5.11GB of memory (75.6% of 6.76GB system memory, determined at start)   
+    EXEC:  - 4 thread(s) (100.0% of 4 available processor(s), determined at start)   
+    EXEC: [2/8] Performing analysis...  [*****]                                                                    (8.5s @ 0.19GB)   
+    EXEC:     2,052 reachable types   (60.0% of    3,421 total)   
+    EXEC:     1,935 reachable fields  (45.3% of    4,272 total)   
+    EXEC:     8,767 reachable methods (36.2% of   24,223 total)   
+    EXEC:       741 types,    37 fields, and   332 methods registered for reflection   
+    EXEC:        49 types,    33 fields, and    48 methods registered for JNI access   
+    EXEC:         4 native libraries: dl, pthread, rt, z   
+    EXEC: [3/8] Building universe...                                                                               (1.5s @ 0.23GB)   
+    EXEC: [4/8] Parsing methods...      [**]                                                                       (2.7s @ 0.23GB)   
+    EXEC: [5/8] Inlining methods...     [***]                                                                      (0.8s @ 0.24GB)   
+    EXEC: [6/8] Compiling methods...    [****]                                                                    (17.1s @ 0.27GB)   
+    EXEC: [7/8] Laying out methods...   [*]                                                                        (0.7s @ 0.26GB)   
+    EXEC: [8/8] Creating image...       [*]                                                                        (1.1s @ 0.23GB)   
+    EXEC:    2.82MB (42.58%) for code area:     3,945 compilation units   
+    EXEC:    3.18MB (48.04%) for image heap:   53,077 objects and 43 resources   
+    EXEC:  636.31kB ( 9.39%) for other data   
+    EXEC:    6.62MB in total   
+    EXEC: ------------------------------------------------------------------------------------------------------------------------   
+    EXEC: Top 10 origins of code area:                                Top 10 object types in image heap:   
+    EXEC:    1.41MB java.base                                          765.27kB byte[] for code metadata   
+    EXEC:    1.12MB svm.jar (Native Image)                             693.88kB byte[] for java.lang.String   
+    EXEC:   84.35kB com.oracle.svm.svm_enterprise                      363.73kB java.lang.String   
+    EXEC:   42.24kB jdk.proxy2                                         322.13kB java.lang.Class   
+    EXEC:   37.79kB jdk.proxy1                                         168.13kB java.util.HashMap$Node   
+    EXEC:   30.20kB org.graalvm.nativeimage.base                       114.01kB char[]   
+    EXEC:   27.42kB org.graalvm.collections                             94.77kB heap alignment   
+    EXEC:   21.20kB jdk.internal.vm.ci                                  81.83kB java.lang.Object[]   
+    EXEC:   16.79kB jdk.internal.vm.compiler                            81.45kB byte[] for reflection metadata   
+    EXEC:   11.80kB jdk.proxy3                                          80.16kB com.oracle.svm.core.hub.DynamicHubCompanion   
+    EXEC:   389.00B for 1 more packages                                490.66kB for 523 more object types   
+    EXEC:                               Use '-H:+BuildReport' to create a report with more details.   
+    EXEC: ------------------------------------------------------------------------------------------------------------------------   
+    EXEC: Security report:   
+    EXEC:  - Binary does not include Java deserialization.   
+    EXEC:  - Use '--enable-sbom' to embed a Software Bill of Materials (SBOM) in the binary.   
+    EXEC: ------------------------------------------------------------------------------------------------------------------------   
+    EXEC: Recommendations:   
+    EXEC:  G1GC: Use the G1 GC ('--gc=G1') for improved latency and throughput.   
+    EXEC:  PGO:  Use Profile-Guided Optimizations ('--pgo') for improved throughput.   
+    EXEC:  INIT: Adopt '--strict-image-heap' to prepare for the next GraalVM release.   
+    EXEC:  HEAP: Set max heap for improved and more predictable memory usage.   
+    EXEC:  CPU:  Enable more CPU features with '-march=native' for improved performance.   
+    EXEC: ------------------------------------------------------------------------------------------------------------------------   
+    EXEC:                         2.8s (7.5% of total time) in 262 GCs | Peak RSS: 0.79GB | CPU load: 3.27   
+    EXEC: ------------------------------------------------------------------------------------------------------------------------   
     EXEC: Produced artifacts:   
     EXEC:  /workspace/gvmee-yum/target/my-app (executable)   
-    EXEC:  /workspace/gvmee-yum/target/my-app.build_artifacts.txt   
-    EXEC: ==================================================================
-    EXEC: Finished generating 'my-app' in 41.7s.   
+    EXEC: ========================================================================================================================   
+    EXEC: Finished generating 'my-app' in 36.7s.   
     ...
     ```
 
